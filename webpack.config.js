@@ -8,6 +8,7 @@ const HtmlwebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: './index.js',
@@ -87,8 +88,15 @@ module.exports = {
         }
       }
     },
-    minimizer: [new CssMinimizerPlugin()], // 이것만 작성하면 production mode에서만 작동한다.
-    minimize: true // 그러므로 minimize값을 true로 주게되면 development mode에서도 CSS optimization이 된다.
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserWebpackPlugin()
+      // {
+      // cache: true // 빠르게 build가 진행될 수 있도록 cache라는 키를 추가 하고 true값을 할당해준다. build가 반복적으로 진행될때 파일에 변화가 없으면 이전(캐싱된) 결과를 사용하면서 빌드시간을 줄여준다.
+      // 하지만 Webpack v5에서 사용하는 TerserWebpackPlugin에서 cache라는 option이 없어지고 default로 설정되므로 따로 설정해줄 필요는 없다.
+      // }
+    ], // 이것만 작성하면 production mode에서만 작동한다.
+    minimize: true // 그러므로 minimize값을 true로 주게되면 development mode에서도 CSS optimization이 된다. 또한 webpack 내부에서 terser를 실행시켜 압축을 진행한다.
   },
   mode: 'none'
 };
