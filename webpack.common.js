@@ -7,7 +7,7 @@ const webpack = require('webpack');
 const isProduction = process.env.NODE_ENV === 'PRODUCTION';
 
 module.exports = {
-  entry: './index.js',
+  entry: './src/index.js',
   output: {
     filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist')
@@ -39,6 +39,26 @@ module.exports = {
       {
         test: /\.hbs$/,
         use: ['handlebars-loader']
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i, // svg파일같은경우에는 url loader에서 다뤄볼 것이다.
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name() {
+                // name 옵션은 함수로도 줄 수 있는데 개발 모드에서는 개발하기 편하게 asset들의 이름이 나오게 해주고 production일때는 해쉬값이 적용되게 설정해준다.
+                if (!isProduction) {
+                  return '[path][name].[ext]';
+                }
+
+                return '[contenthash].[ext]';
+              }, // ext는 확장자(extension)의 약자이다.
+              publicPath: 'assets/', // assets폴더 안의 파일들을 보겠다.
+              outputPath: 'assets/' // 실제로 빌드가되고나서 file loader를 통해 file이 생성되는 경로를 개입할 수 있게 해주는 키, dist폴더내에 assets폴더를 만들어 asset들을 거기에 담겠다.
+            }
+          }
+        ]
       }
     ]
   },

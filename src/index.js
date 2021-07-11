@@ -3,12 +3,19 @@ import styles from './index.css'; // css는 선택자의 이름이 전역 환경
 //CSS Modules라는 설정을 해주면, css파일을 모듈로 불러오고 class이름들을 자바스크립트 파일에 직접 불러와서 사용할 수 있다.
 // 그래서 CSS Modules 설정을 하면 css파일별로 클래스 이름이 같아도 겹치지 않는다는 장점이 있다.
 import $ from 'jquery';
+import slackImg from './assets/slack_logo.jpeg';
 
 function component() {
   const element = document.createElement('div');
   element.innerHTML = 'Hello Webpack';
 
+  const imgElement = document.createElement('img');
+  imgElement.src = slackImg;
+
   console.log(styles); //{helloWebpack: "Xsm8tCif7FknljylODIGx"}, css파일에 있는 클래스 이름이 객체 키로 전달이 되고 키의 값은 변형된 해시값이 할당된다.
+
+  console.log(slackImg);
+  element.appendChild(imgElement);
 
   element.classList = styles.helloWebpack;
 
