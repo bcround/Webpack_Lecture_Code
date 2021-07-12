@@ -12,6 +12,7 @@ function component() {
 
   const imgElement = document.createElement('img');
   imgElement.src = slackImgSvg;
+  imgElement.classList = styles.slackImg;
 
   console.log(styles); //{helloWebpack: "Xsm8tCif7FknljylODIGx"}, css파일에 있는 클래스 이름이 객체 키로 전달이 되고 키의 값은 변형된 해시값이 할당된다.
 

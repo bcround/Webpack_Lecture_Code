@@ -4,6 +4,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 
+const postcssLoader = {
+  loader: 'postcss-loader'
+};
+
 const isProduction = process.env.NODE_ENV === 'PRODUCTION';
 
 module.exports = {
@@ -32,6 +36,7 @@ module.exports = {
                   modules: true
                 }
               },
+              postcssLoader,
               'sass-loader'
             ]
           },
@@ -45,6 +50,7 @@ module.exports = {
                   modules: true
                 }
               },
+              postcssLoader,
               'sass-loader'
             ]
           }
