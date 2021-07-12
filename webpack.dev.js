@@ -1,5 +1,6 @@
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 const config = {
   mode: 'development',
@@ -22,7 +23,8 @@ const config = {
       ]
     },
     port: 3333 // port키는 자동으로 설정되어 있는 8080 포트값을 임의의 포트값으로 수정할 수 있게 해준다. 보통 여러 프로젝트를 사용하다보면 포트번호가 충돌될 수 있기 때문에 가급적이면 작업하는 환경에 맞는 숫자패턴으로 수정하는것을 추천한다.
-  }
+  },
+  plugins: [new StyleLintPlugin()]
 };
 
 module.exports = merge(common, config);
