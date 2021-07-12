@@ -91,6 +91,11 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /.js/,
+        exclude: /node_modules/, // exclude는 여러 확장자 중에 특정한 경로나 특정한 파일을 포함시키지 않을때 사용한다.
+        loader: 'babel-loader'
       }
     ]
   },

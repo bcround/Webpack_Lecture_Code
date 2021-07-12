@@ -5,6 +5,7 @@ import styles from './index.module.scss'; // css는 선택자의 이름이 전�
 import $ from 'jquery';
 import slackImg from './assets/slack_logo.jpeg';
 import slackImgSvg from './assets/slack-new-logo.svg';
+import '@babel/polyfill';
 
 function component() {
   const element = document.createElement('div');
